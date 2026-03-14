@@ -8,8 +8,8 @@ PlantingTimesConfig.Base = {
     TillingAnimation = 'amb_work@world_human_farmer_rake@male_a@idle_a',
     TillingAnimDict = "idle_a",
     SeedingTime = 1000,
-    SeedingAnimation = "amb_work@world_human_feed_chickens@female_a@base", -- I dont know which one to use 
-    SeedingAnimDict = "base" -- Help
+    SeedingAnimation = "amb_work@world_human_feed_chickens@female_a@base", 
+    SeedingAnimDict = "base" 
 }
 
 PlantingTimesConfig.Base.__index = PlantingTimesConfig.Base

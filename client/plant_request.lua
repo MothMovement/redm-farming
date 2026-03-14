@@ -11,8 +11,8 @@ RegisterNetEvent('moth:startPlanting', function()
     TILLING_DICT = base.TillingAnimDict
     TILLING_TIME = base.TillingTime
 
-    SEEDING_ANIMATION =  base.TillingAnimation
-    SEEDING_DICT = base.TillingAnimDict
+    SEEDING_ANIMATION =  base.SeedingAnimation
+    SEEDING_DICT = base.SeedingAnimDict
     SEEDING_TIME = base.TillingTime
     
     RequestAnimDict(TILLING_ANIMATION)
