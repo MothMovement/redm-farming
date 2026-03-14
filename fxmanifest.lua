@@ -1,19 +1,18 @@
 fx_version 'cerulean'
 game 'rdr3'
-lua54 'yes'
+
+rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 
 author 'Moth'
 description 'A farming script for redm'
 version '1.0.0'
 
-shared_scripts {
-    '@vorp_core/imports.lua',
-    'config.lua',
-    'shared/*.lua'
-}
-
 client_scripts {
     'client/*.lua'
+}
+
+shared_scripts {
+    'shared/*.lua'
 }
 
 server_scripts {
@@ -23,8 +22,4 @@ server_scripts {
 
 dependencies {
     'vorp_core'
-}
-
-escrow_ignore {
-
 }

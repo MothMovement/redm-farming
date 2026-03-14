@@ -1,13 +1,16 @@
-
+PlantRequest = {}
 -- TODO ensure configurability with config for extra items. Not sure how in depth I want it
 CreateThread(function()
-    createDatabase()
 
+    CREATEDATABSAE()
+    REGISTERITEMS()
+    
+    print('INITIALIZING MOTH-FARMING')
 end)
 
 
 
-local function createDatabase()
+function CREATEDATABSAE()
     SQL_TABLE_CREATION_QUERY = [[
     CREATE TABLE IF NOT EXISTS current_plants (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -18,10 +21,11 @@ local function createDatabase()
     fertilized TINYINT(1) NOT NULL DEFAULT 0,
     planted_by VARCHAR(60) NOT NULL,
     planted_by_job VARCHAR(50) NOT NULL,
-    pos_x DOUBLE NOT NULL,
-    pos_y DOUBLE NOT NULL,
-    pos_z DOUBLE NOT NULL,
+    pos_x FLOAT NOT NULL,
+    pos_y FLOAT NOT NULL,
+    pos_z FLOAT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    INDEX idx_pos_xy (pos_x, pos_y)
     );
     ]]
 
@@ -29,9 +33,24 @@ local function createDatabase()
 end
 
 
-local function registerItems()
+function REGISTERITEMS()
     --Will probably loop through config to add all items, just hardcoding one item for now. 
-    exports.vorp_inventory:registerUsableItem('corn_seed', function(data) 
-        print(data)
+    exports.vorp_inventory:registerUsableItem('Yarrow_Seed', function(data) 
+        local plantingUser = GetPlayerPed(data.source)
+        print(PlantRequest[data.source])
+        if PlantRequest[data.source] ~= nil then 
+            print('this is not nill')
+            return -- Can put logic for cheating here, or webook this is probably broken
+        end
+        exports.vorp_inventory:subItem(data.source, data.item.item, 1)
+        PlantRequest[data.source] = {
+            beginTime = os.time(),
+            plantType = PlantConfig.Seeds['Yarrow'],
+            playInitCords = GetEntityCoords(plantingUser)
+        }
+        print(PlantRequest[data.source])
+
+        TriggerClientEvent('moth:startPlanting', data.source)
+        
     end)
 end
